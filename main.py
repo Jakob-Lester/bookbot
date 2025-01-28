@@ -36,16 +36,36 @@ def sort_dict(dict):
     return val_ordered
         
 def main():
-    with open("books/frankenstein.txt") as f:
-        f.contents = f.read()
-        word_count = get_word_count(f.contents)
-        character_count = get_character_count(f.contents)
+    book = input("Would you like to get the report for 'The Odyssey', 'Frankenstein', or would you like to input your own text?:\n").lower()
+    if book == "the odyssey":
+        with open("books/the_odyssey.txt") as f:
+            f.contents = f.read()
+            word_count = get_word_count(f.contents)
+            character_count = get_character_count(f.contents)
+            ordered_dict = sort_dict(character_count)
+            print(f"--- Begin report of {book} ---")
+            print(f"{word_count} words found in the document")
+            for key in ordered_dict:
+                print(f"The '{key}' character was found {ordered_dict[key]} times")
+            print("--- End report ---")
+    elif book == "frankenstein":
+        with open("books/frankenstein.txt") as f:
+            f.contents = f.read()
+            word_count = get_word_count(f.contents)
+            character_count = get_character_count(f.contents)
+            ordered_dict = sort_dict(character_count)
+            print(f"--- Begin report of {book} ---")
+            print(f"{word_count} words found in the document")
+            for key in ordered_dict:
+                print(f"The '{key}' character was found {ordered_dict[key]} times")
+            print("--- End report ---")
+    else:
+        word_count = get_word_count(book)
+        character_count = get_character_count(book)
         ordered_dict = sort_dict(character_count)
-        print("--- Begin report of books/frankenstein.txt ---")
+        print(f"--- Begin report of custom input ---")
         print(f"{word_count} words found in the document")
         for key in ordered_dict:
             print(f"The '{key}' character was found {ordered_dict[key]} times")
         print("--- End report ---")
-
-
 main()
